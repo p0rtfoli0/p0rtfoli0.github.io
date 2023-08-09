@@ -36,6 +36,35 @@ function accordeon(topSection, bottomSection, button, activeClassTop) {
 
 /***/ }),
 
+/***/ "./src/js/modules/menu.js":
+/*!********************************!*\
+  !*** ./src/js/modules/menu.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+function menu(menuContainer, itemMenu, hamburgerElement, menuClassActive, hamburgerClassActive) {
+  const menu = document.querySelector(menuContainer),
+    menuItem = document.querySelectorAll(itemMenu),
+    hamburger = document.querySelector(hamburgerElement);
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle(hamburgerClassActive);
+    menu.classList.toggle(menuClassActive);
+  });
+  menuItem.forEach(item => {
+    item.addEventListener('click', () => {
+      hamburger.classList.toggle(hamburgerClassActive);
+      menu.classList.toggle(menuClassActive);
+    });
+  });
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (menu);
+
+/***/ }),
+
 /***/ "./src/js/modules/slider.js":
 /*!**********************************!*\
   !*** ./src/js/modules/slider.js ***!
@@ -162,6 +191,8 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/slider */ "./src/js/modules/slider.js");
 /* harmony import */ var _modules_accordeon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/accordeon */ "./src/js/modules/accordeon.js");
+/* harmony import */ var _modules_menu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/menu */ "./src/js/modules/menu.js");
+
 
 
 
@@ -176,6 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
     field: '.slider__inner'
   });
   (0,_modules_accordeon__WEBPACK_IMPORTED_MODULE_1__["default"])('.questions__top-section', '.questions__bottom-section', '.questions__open', 'questions__top-section_active');
+  (0,_modules_menu__WEBPACK_IMPORTED_MODULE_2__["default"])('.header__menu', '.header__menu-item', '.header__hamburger', 'header__menu_active', 'header__hamburger_active');
 });
 })();
 
