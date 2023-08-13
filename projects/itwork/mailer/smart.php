@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 $name = $_POST['name'];
 $citizenship = $_POST['citizenship'];
@@ -28,7 +28,7 @@ $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, 
 $mail->Port = 465;                                    // TCP port to connect to
  
 $mail->setFrom('itwork.notifications@gmail.com', 'IT-Work');   // От кого письмо 
-$mail->addAddress('jkytky@bk.ru');     // Кому будет приходить
+$mail->addAddress('samufa2022@gmail.com');     // Кому будет приходить
 //$mail->addAddress('ellen@example.com');               // Name is optional
 //$mail->addReplyTo('info@example.com', 'Information');
 //$mail->addCC('cc@example.com');

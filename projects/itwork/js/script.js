@@ -146,8 +146,43 @@ function sendForm(formSelector, exampleSelector, resultValueSelector, btnSubmit,
     e.preventDefault();
     if (+checkResult.value == checkObj.result) {
       buttonSubmit.innerHTML = `<span class="${loaderSelector} ${classActiveLoader}"></span>`;
+
+      // reCaptcha Google ----start-----
+      let formData;
+      grecaptcha.enterprise.ready(async () => {
+        await grecaptcha.enterprise.execute('6LcsdqInAAAAAI5DYzusvEJqCZ78Tvc4Z9URqn5X', {
+          action: 'homepage'
+        }).then(function (token) {
+          document.getElementById('token').value = token;
+          const data = new URLSearchParams();
+          // for (const pair of new FormData(form)) {
+          //     console.log(pair[0]);
+          //     console.log(pair[1]);
+          //     data.append(pair[0], pair[1]);
+          // }
+          // console.log(data);
+          // console.log(form);
+          formData = new FormData(form);
+          fetch('../mailer/send.php', {
+            method: 'POST',
+            body: formData
+          }).then(response => response.json()).then(result => {
+            if (result["on_score"] >= 0.5) {
+              console.log('Вы человек, проверка пройдена');
+              console.log(result);
+              // Отправка данных на почту
+              send();
+            } else {
+              console.log('Проверка не пройдена!');
+              console.log(result);
+            }
+          });
+
+          // reCaptcha Google ----end-----
+        });
+      });
+
       async function send() {
-        let formData = new FormData(form);
         let response = await fetch('../mailer/smart.php', {
           method: 'POST',
           body: formData
@@ -162,7 +197,6 @@ function sendForm(formSelector, exampleSelector, resultValueSelector, btnSubmit,
           buttonSubmit.innerHTML = `Отправить анкету`;
         }
       }
-      send();
     } else {
       checkResult.value = "Значение указано неверно!";
     }
