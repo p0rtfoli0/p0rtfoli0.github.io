@@ -12,6 +12,9 @@ $age = $_POST['age'];
 $questions = $_POST['questions'];
 $document = $_POST['document'];
 $approval = $_POST['approval'];
+$phone = $_POST['phone'];
+$social = $_POST['social'];
+$tariff = $_POST['tariff'];
 
 require_once('phpmailer/PHPMailerAutoload.php');
 $mail = new PHPMailer;
@@ -28,7 +31,7 @@ $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, 
 $mail->Port = 465;                                    // TCP port to connect to
  
 $mail->setFrom('itwork.notifications@gmail.com', 'IT-Work');   // От кого письмо 
-$mail->addAddress('samufa2022@gmail.com');     // Кому будет приходить
+$mail->addAddress('jkytky@bk.ru');     // Кому будет приходить
 //$mail->addAddress('ellen@example.com');               // Name is optional
 //$mail->addReplyTo('info@example.com', 'Information');
 //$mail->addCC('cc@example.com');
@@ -72,7 +75,10 @@ $mail->Body    = '
 	В какой стране Вы сейчас находитесь?: ' . $country . '<br>
 	Сколько полных лет: ' . $age . '<br>
 	На кого учились, какие курсы проходили, кем и где работали, женаты, есть ли дети, есть ли у вас судимости, депорты?: ' . $questions . '<br>
-	Понимаете ли Вы что Ваши траты на все этапы работы с нами составят ориентировочно 500-800 евро? Поминаете ли Вы сколько, когда и за что платить? Какие этапы Вас ждут, какие гарантии и прочее?: ' . $approval . '';
+	Понимаете ли Вы что Ваши траты на все этапы работы с нами составят ориентировочно 500-800 евро? Поминаете ли Вы сколько, когда и за что платить? Какие этапы Вас ждут, какие гарантии и прочее?: ' . $approval . '<br>
+	Какой тарифный план выбираете?: ' . $tariff . '<br>
+	Напишите, Ваш мобильный телефон, аккаунт Telegram, Viber,WhatsApp, по которому Вас можно будет найти для связи: ' . $phone . '<br>
+	Укажите адрес Вашей электронной почты, ссылку на инстаграм, фейсбук, вконтакте, по которому мы сможем с Вами связаться: ' . $social . '';
 
 if(!$mail->send()) {
 	$message = 'Ошибка!';

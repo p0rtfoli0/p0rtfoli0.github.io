@@ -94,6 +94,38 @@ function hide(buttonSelector, formContainerSelector, formSelector, activeClass) 
 
 /***/ }),
 
+/***/ "./src/js/modules/lang.js":
+/*!********************************!*\
+  !*** ./src/js/modules/lang.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+function lang(triggerSelector, langBlock, activeClass, langElement) {
+  const button = document.querySelector(triggerSelector),
+    langBlck = document.querySelector(langBlock),
+    langEl = document.querySelectorAll(langElement);
+  button.addEventListener('click', () => {
+    if (langBlck.classList.contains(activeClass)) {
+      langBlck.classList.remove(activeClass);
+      langEl.forEach(item => {
+        item.style.display = 'none';
+      });
+    } else {
+      langBlck.classList.add(activeClass);
+      langEl.forEach(item => {
+        item.style.display = 'block';
+      });
+    }
+  });
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (lang);
+
+/***/ }),
+
 /***/ "./src/js/modules/menu.js":
 /*!********************************!*\
   !*** ./src/js/modules/menu.js ***!
@@ -113,9 +145,11 @@ function menu(menuContainer, itemMenu, hamburgerElement, menuClassActive, hambur
     menu.classList.toggle(menuClassActive);
   });
   menuItem.forEach(item => {
-    item.addEventListener('click', () => {
-      hamburger.classList.toggle(hamburgerClassActive);
-      menu.classList.toggle(menuClassActive);
+    item.addEventListener('click', e => {
+      if (!e.target.classList.contains('header__item-link_drop')) {
+        hamburger.classList.toggle(hamburgerClassActive);
+        menu.classList.toggle(menuClassActive);
+      }
     });
   });
 }
@@ -135,12 +169,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _check__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./check */ "./src/js/modules/check.js");
 
-function sendForm(formSelector, exampleSelector, resultValueSelector, btnSubmit, loaderSelector, classActiveLoader) {
+function sendForm(formSelector, exampleSelector, resultValueSelector, btnSubmit, loaderSelector, classActiveLoader, buttonClose, overlaySelector, modalInfoSelector, classActiveOverlay) {
   const form = document.querySelector(formSelector),
     checkResult = document.querySelector(resultValueSelector),
     buttonSubmit = document.querySelector(btnSubmit),
-    checkExample = document.querySelector(exampleSelector);
-  const checkObj = (0,_check__WEBPACK_IMPORTED_MODULE_0__["default"])();
+    checkExample = document.querySelector(exampleSelector),
+    buttonCloseElement = document.querySelector(buttonClose);
+  let checkObj = (0,_check__WEBPACK_IMPORTED_MODULE_0__["default"])(),
+    messageObj = {
+      success: [`Ваша анкета отправлена, ожидайте обратной связи от администратора, чтобы ускорить процесс обработки анкеты, напишите, пожалуйста, администратору в Telegram - <a href="https://t.me/RenatJobs" class="modal__info-link">https://t.me/RenatJobs</a>`, '#aaec1e'],
+      error: [`Не удалось отправить Вашу анкету, свяжитесь, пожалуйста, с администратором в Telegram - <a href="https://t.me/RenatJobs" class="modal__info-link">https://t.me/RenatJobs</a>`, '#DB0000']
+    };
   checkExample.textContent = checkObj.example;
   form.addEventListener('submit', e => {
     e.preventDefault();
@@ -154,27 +193,18 @@ function sendForm(formSelector, exampleSelector, resultValueSelector, btnSubmit,
           action: 'homepage'
         }).then(function (token) {
           document.getElementById('token').value = token;
-          const data = new URLSearchParams();
-          // for (const pair of new FormData(form)) {
-          //     console.log(pair[0]);
-          //     console.log(pair[1]);
-          //     data.append(pair[0], pair[1]);
-          // }
-          // console.log(data);
-          // console.log(form);
           formData = new FormData(form);
           fetch('../mailer/send.php', {
             method: 'POST',
             body: formData
           }).then(response => response.json()).then(result => {
             if (result["on_score"] >= 0.5) {
-              console.log('Вы человек, проверка пройдена');
-              console.log(result);
               // Отправка данных на почту
               send();
             } else {
-              console.log('Проверка не пройдена!');
-              console.log(result);
+              openModal(overlaySelector, modalInfoSelector, messageObj.error);
+              checkObj = (0,_check__WEBPACK_IMPORTED_MODULE_0__["default"])();
+              checkExample.textContent = checkObj.example;
             }
           });
 
@@ -189,14 +219,40 @@ function sendForm(formSelector, exampleSelector, resultValueSelector, btnSubmit,
         });
         if (response.ok) {
           let result = await response.json();
-          console.log(result.message);
           form.reset();
           buttonSubmit.innerHTML = `Отправить анкету`;
+          openModal(overlaySelector, modalInfoSelector, messageObj.success);
+          checkObj = (0,_check__WEBPACK_IMPORTED_MODULE_0__["default"])();
+          checkExample.textContent = checkObj.example;
         } else {
-          console.log("Ошибка");
           buttonSubmit.innerHTML = `Отправить анкету`;
+          openModal(overlaySelector, modalInfoSelector, messageObj.error);
+          checkObj = (0,_check__WEBPACK_IMPORTED_MODULE_0__["default"])();
+          checkExample.textContent = checkObj.example;
         }
       }
+      buttonCloseElement.addEventListener('click', () => {
+        closeModal(overlaySelector);
+      });
+      function openModal(modalSelector, modalInfo, messageModal) {
+        const modalWindow = document.querySelector(modalSelector),
+          modalInfoElement = document.querySelector(modalInfo);
+        modalInfoElement.innerHTML = messageModal[0];
+        document.querySelector('.modal').style.borderColor = messageModal[1];
+        modalWindow.classList.add(classActiveOverlay);
+        document.body.style.overflow = 'hidden';
+      }
+      function closeModal(modalSelector) {
+        const modalWindow = document.querySelector(modalSelector);
+        modalWindow.classList.remove(classActiveOverlay);
+        document.body.style.overflow = '';
+      }
+      document.addEventListener('keydown', e => {
+        const modalWindow = document.querySelector(overlaySelector);
+        if (e.code === "Escape" && modalWindow.classList.contains(classActiveOverlay)) {
+          closeModal(overlaySelector);
+        }
+      });
     } else {
       checkResult.value = "Значение указано неверно!";
     }
@@ -385,12 +441,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_hide__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/hide */ "./src/js/modules/hide.js");
 /* harmony import */ var _modules_sendForm__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/sendForm */ "./src/js/modules/sendForm.js");
 /* harmony import */ var _modules_up__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/up */ "./src/js/modules/up.js");
+/* harmony import */ var _modules_lang__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/lang */ "./src/js/modules/lang.js");
 
 
 
 
 
 // import check from './modules/check';
+
 
 
 
@@ -406,8 +464,9 @@ document.addEventListener('DOMContentLoaded', () => {
   (0,_modules_accordeon__WEBPACK_IMPORTED_MODULE_1__["default"])('.questions__top-section', '.questions__bottom-section', '.questions__open', 'questions__top-section_active');
   (0,_modules_menu__WEBPACK_IMPORTED_MODULE_2__["default"])('.header__menu', '.header__menu-item', '.header__hamburger', 'header__menu_active', 'header__hamburger_active');
   (0,_modules_hide__WEBPACK_IMPORTED_MODULE_3__["default"])('.vacancy__button', '.vacancy__field-form', '.vacancy__form', 'vacancy__field-form_active');
-  (0,_modules_sendForm__WEBPACK_IMPORTED_MODULE_4__["default"])('.vacancy__form', '.vacancy__example', '#answer', '.vacancy__submit', 'vacancy__loader', 'vacancy__loader_active');
+  (0,_modules_sendForm__WEBPACK_IMPORTED_MODULE_4__["default"])('.vacancy__form', '.vacancy__example', '#answer', '.vacancy__submit', 'vacancy__loader', 'vacancy__loader_active', '.modal__close', '.overlay', '.modal__info', 'overlay_show');
   (0,_modules_up__WEBPACK_IMPORTED_MODULE_5__["default"])('.pageup');
+  (0,_modules_lang__WEBPACK_IMPORTED_MODULE_6__["default"])('.header__item-link_drop', '.language', 'language_active', '.language__img');
 });
 })();
 
