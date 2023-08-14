@@ -94,6 +94,350 @@ function hide(buttonSelector, formContainerSelector, formSelector, activeClass) 
 
 /***/ }),
 
+/***/ "./src/js/modules/lang-change.js":
+/*!***************************************!*\
+  !*** ./src/js/modules/lang-change.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+function langChange(langElements, videoSelector) {
+  const langEls = document.querySelectorAll(langElements),
+    videoSrc = document.querySelector(videoSelector);
+  if (sessionStorage.getItem('lang')) {
+    if (sessionStorage.getItem('lang') == 'en') {
+      en();
+      videoSrc.src = "./video/presentation/english_video.mp4";
+    } else if (sessionStorage.getItem('lang') == 'uk') {
+      uk();
+    } else if (sessionStorage.getItem('lang') == 'tg') {
+      tg();
+    } else if (sessionStorage.getItem('lang') == 'uz') {
+      uz();
+    } else if (sessionStorage.getItem('lang') == 'ky') {
+      ky();
+    } else if (sessionStorage.getItem('lang') == 'kk') {
+      kk();
+    } else if (sessionStorage.getItem('lang') == 'ar') {
+      ar();
+      videoSrc.src = "./video/presentation/english_video.mp4";
+    }
+  }
+  langEls.forEach(item => {
+    item.addEventListener('click', () => {
+      item.getAttribute('data-google-lang');
+      sessionStorage.setItem('lang', item.getAttribute('data-google-lang'));
+    });
+  });
+  function en() {
+    document.querySelector('.advantages__statistics').style.width = '515px';
+    document.querySelector('.advantages__title-img').style.cssText = 'width: 375px; left: 105px;';
+    document.querySelector('.meet__info-img').style.cssText = 'right: 122px;';
+    document.querySelector('.examples__title-img').style.cssText = 'width: 337px;';
+    document.querySelector('.questions__title-img').style.cssText = 'display: none;';
+    document.querySelector('.vacancy__title-img').style.cssText = 'right: 20%;';
+    if (window.matchMedia('(max-width: 1330px)').matches) {
+      document.querySelector('.advantages__statistics').style.cssText = 'width: 410px;';
+      document.querySelectorAll('.advantages__statistics-data').forEach(item => {
+        item.style.cssText = 'font-size: 22px;';
+      });
+      document.querySelector('.advantages__title-img').style.cssText = 'width: 270px; left: 70px;';
+      document.querySelector('.meet__info-img').style.cssText = 'width: 23%; right: 23%;';
+      document.querySelector('.examples__title-img').style.cssText = 'width: 31%; top: 0;';
+    }
+    if (window.matchMedia('(max-width: 990px)').matches) {
+      document.querySelector('.advantages__statistics').style.cssText = 'width: 316px;';
+      document.querySelectorAll('.advantages__statistics-data').forEach(item => {
+        item.style.cssText = 'font-size: 18px;';
+      });
+      document.querySelector('.advantages__title-img').style.cssText = 'width: 58%; left: 59px;';
+      document.querySelector('.stages__img').style.cssText = 'width: 52%; top: -20px;';
+      document.querySelector('.meet__info-img').style.cssText = 'top: 7%; right: 21%;';
+    }
+    if (window.matchMedia('(max-width: 767px)').matches) {
+      document.querySelector('.advantages__statistics').style.cssText = 'width: 275px;';
+      document.querySelectorAll('.advantages__statistics-data').forEach(item => {
+        item.style.cssText = 'font-size: 14px;';
+      });
+      document.querySelector('.advantages__title-img').style.cssText = 'width: 52%; right: 80px;';
+      document.querySelector('.stages__img').style.cssText = 'top: -12px;';
+      document.querySelector('.slider__border-image').style.cssText = 'width: 47%;';
+    }
+    if (window.matchMedia('(max-width: 575px)').matches) {
+      document.querySelector('.advantages__statistics').style.cssText = 'width: 310px;';
+      document.querySelectorAll('.advantages__statistics-data').forEach(item => {
+        item.style.cssText = 'font-size: 17px;';
+      });
+      document.querySelector('.advantages__photo-descr').style.cssText = 'display: flex; flex-direction: column;';
+      document.querySelector('.advantages__title-img').style.cssText = 'width: 57%; right: 36px;';
+      document.querySelector('.stages__img').style.cssText = 'width: 264px;';
+      document.querySelector('.examples__title-img').style.cssText = 'width: 47%; top: 8px;';
+      document.querySelector('.vacancy__title-img').style.cssText = 'right: 22%;';
+    }
+  }
+  function uk() {
+    document.querySelector('.header__item-link').textContent = document.querySelector('.header__item-link').textContent.replace(/\/w/, i => i.toUpperCase());
+    console.log(document.querySelector('.header__item-link').textContent.replace(/\/w/, i => i.toUpperCase()));
+    document.querySelector('.advantages__title-img').style.cssText = 'width: 50%; right: 28%;';
+    document.querySelector('.stages__img').style.cssText = 'width: 39%; top: 0;';
+    document.querySelector('.slider__border-image').style.cssText = 'width: 47%; right: -18px; top: 5px;';
+    document.querySelector('.meet__info-img').style.cssText = 'width: 21%; top: 8px; right: 60px;';
+    document.querySelector('.questions__title-img').style.cssText = 'right: 27%;';
+    document.querySelector('.vacancy__title-img').style.cssText = 'right: 13%;';
+    if (window.matchMedia('(max-width: 1330px)').matches) {
+      document.querySelector('.stages__img').style.cssText = 'width: 45%; top: -8px;';
+    }
+    if (window.matchMedia('(max-width: 990px)').matches) {
+      document.querySelector('.stages__img').style.cssText = 'width: 55%; top: 0;';
+      document.querySelector('.meet__info-img').style.cssText = 'right: 44px;';
+      document.querySelector('.vacancy__title-img').style.cssText = 'width: 44%; right: 21%; top: 5px;';
+    }
+    if (window.matchMedia('(max-width: 767px)').matches) {
+      document.querySelector('.advantages__title-img').style.cssText = 'width: 41%; right: 18%;';
+      document.querySelector('.stages__img').style.cssText = 'width: 47%; top: 10px;';
+      document.querySelector('.meet__info-img').style.cssText = 'right: 33px;';
+    }
+    if (window.matchMedia('(max-width: 575px)').matches) {
+      document.querySelector('.advantages__title-img').style.cssText = 'width: 54%; right: 24px;';
+      document.querySelector('.slider__border-image').style.cssText = 'right: -11px; width: 48%;';
+      document.querySelector('.examples__title-img').style.cssText = 'top: -6px;';
+      document.querySelector('.questions__title-img').style.cssText = 'left: 49%; width: 154px; top: -9px;';
+      document.querySelectorAll('.advantages__statistics-data').forEach(item => {
+        item.style.cssText = 'font-size: 17px;';
+      });
+      document.querySelector('.vacancy__title-img').style.cssText = 'width: 44%; right: 18%; top: 15px;';
+    }
+  }
+  function tg() {
+    document.querySelectorAll('.promo__btn-text').forEach(item => {
+      item.style.cssText = 'font-size: 18px;';
+    });
+    document.querySelector('.advantages__title-img').style.cssText = 'width: 65%; right: 36%;';
+    document.querySelector('.tariff__subtitle-text').style.cssText = 'font-size: 42px;';
+    document.querySelectorAll('.tariff__btn').forEach(item => {
+      item.style.cssText = 'font-size: 25px; margin-top: 12px;';
+    });
+    document.querySelectorAll('.tariff__price').forEach(item => {
+      item.style.cssText = 'margin-top: 10px;';
+    });
+    document.querySelector('.stages__img').style.cssText = 'width: 34%; top: 10px;';
+    document.querySelector('.slider__border-image').style.cssText = 'width: 47%; top: -7px;';
+    document.querySelector('.meet__info-text').style.cssText = 'font-size: 29px;';
+    document.querySelector('.meet__info-img').style.cssText = 'display: none;';
+    document.querySelector('.data__title-img').style.cssText = 'top: -36px; width: 367px;';
+    document.querySelector('.questions__title-text').style.cssText = 'font-size: 59px;';
+    document.querySelector('.questions__title-img').style.cssText = 'width: 52%;top: -34px; right: -13px;';
+    document.querySelector('.vacancy__title-img').style.cssText = 'width: 40%; top: 10px;';
+    if (window.matchMedia('(max-width: 1330px)').matches) {
+      document.querySelectorAll('.advantages__statistics-data').forEach(item => {
+        item.style.cssText = 'font-size: 23px;';
+      });
+      document.querySelector('.advantages__title-img').style.cssText = 'width: 69%; right: 32%;';
+      document.querySelector('.tariff__subtitle-text').style.cssText = 'font-size: 29px;';
+      document.querySelectorAll('.tariff__btn').forEach(item => {
+        item.style.cssText = 'font-size: 24px; margin-top: 39px;';
+      });
+      document.querySelector('.stages__img').style.cssText = 'width: 39%; top: 2px;';
+      document.querySelector('.meet__info-text').style.cssText = 'font-size: 23px;';
+      document.querySelector('.examples__title-img').style.cssText = 'width: 35%;';
+      document.querySelector('.questions__title-text').style.cssText = 'font-size: 55px;';
+      document.querySelector('.vacancy__title-img').style.cssText = 'width: 42%; top: 23px';
+      document.querySelector('.vacancy__submit').style.cssText = 'font-size: 23px;';
+    }
+    if (window.matchMedia('(max-width: 990px)').matches) {
+      document.querySelectorAll('.advantages__statistics-data').forEach(item => {
+        item.style.cssText = 'font-size: 16px;';
+      });
+      document.querySelector('.stages__img').style.cssText = 'width: 41%; top: 11px;';
+      document.querySelector('.data__title-img').style.cssText = 'width: 285px;';
+      document.querySelector('.questions__title-text').style.cssText = 'font-size: 39px;';
+      document.querySelector('.questions__title-img').style.cssText = 'top: -20px; width: 52%;';
+      document.querySelector('.vacancy__title-img').style.cssText = 'top: 10px; width: 42%;';
+    }
+    if (window.matchMedia('(max-width: 767px)').matches) {
+      document.querySelector('.advantages__title-img').style.cssText = 'width: 69%; right: 15%;';
+      document.querySelector('.questions__title-text').style.cssText = 'font-size: 36px;';
+    }
+    if (window.matchMedia('(max-width: 575px)').matches) {
+      document.querySelector('.advantages__title-img').style.cssText = 'width: 89%; right: 6%;';
+      document.querySelector('.tariff__subtitle-text').style.cssText = 'font-size: 17px;';
+      document.querySelectorAll('.tariff__btn').forEach(item => {
+        item.style.cssText = 'font-size: 18px;';
+      });
+      document.querySelector('.stages__img').style.cssText = 'width: 70%; top: -3px;';
+      document.querySelector('.data__title-img').style.cssText = 'width: 217px;';
+      document.querySelector('.examples__title-img').style.cssText = 'display: none;';
+      document.querySelector('.questions__title-img').style.cssText = 'display: none;';
+      document.querySelector('.vacancy__title-img').style.cssText = 'top: 19px; width: 38%;';
+      document.querySelector('.vacancy__submit').style.cssText = 'font-size: 21px;';
+    }
+  }
+  function uz() {
+    document.querySelector('.stages__img').style.cssText = 'width: 53%; top: -22px;';
+    document.querySelector('.meet__info-img').style.cssText = 'display: none;';
+    document.querySelector('.questions__title-img').style.cssText = 'width: 33%; right: 67px;';
+    document.querySelector('.vacancy__title-text').style.cssText = 'font-size: 83px;';
+    if (window.matchMedia('(max-width: 1330px)').matches) {
+      document.querySelector('.advantages__title-img').style.cssText = 'width: 66%; right: 3%;';
+      document.querySelector('.advantages__title').style.cssText = 'font-size: 37px;';
+      document.querySelector('.examples__text').style.cssText = 'font-size: 45px;';
+      document.querySelector('.vacancy__title-text').style.cssText = 'font-size: 56px;';
+    }
+    if (window.matchMedia('(max-width: 990px)').matches) {
+      document.querySelector('.advantages__title').style.cssText = 'font-size: 27px;';
+      document.querySelector('.stages__img').style.cssText = 'width: 65%; top: -33px;';
+      document.querySelector('.slider__border-image').style.cssText = 'width: 51%;';
+      document.querySelector('.examples__text').style.cssText = 'font-size: 38px;';
+      document.querySelector('.questions__title-img').style.cssText = 'width: 31%; right: 63px; top: 0;';
+      document.querySelector('.vacancy__title-text').style.cssText = 'font-size: 39px;';
+    }
+    if (window.matchMedia('(max-width: 767px)').matches) {
+      document.querySelector('.promo__subtitle-text').style.cssText = 'font-size: 34px;';
+      document.querySelector('.advantages__title-img').style.cssText = 'width: 37%; right: 21%;';
+      document.querySelector('.stages__img').style.cssText = 'width: 64%; top: -23px;';
+      document.querySelector('.vacancy__title-text').style.cssText = 'font-size: 34px;';
+    }
+    if (window.matchMedia('(max-width: 575px)').matches) {
+      document.querySelector('.promo__subtitle-text').style.cssText = 'font-size: 26px;';
+      document.querySelector('.advantages__title-img').style.cssText = 'width: 62%; right: 2%;';
+      document.querySelector('.stages__text').style.cssText = 'font-size: 29px;';
+      document.querySelector('.stages__img').style.cssText = 'display: none;';
+      document.querySelector('.examples__text').style.cssText = 'font-size: 24px;';
+      document.querySelector('.questions__title-img').style.cssText = 'display: none;';
+      document.querySelector('.vacancy__title-img').style.cssText = 'display: none;';
+    }
+  }
+  function ky() {
+    document.querySelector('.promo__subtitle-text').style.cssText = 'font-size: 43px;';
+    document.querySelector('.advantages__title').style.cssText = 'font-size: 51px;';
+    document.querySelector('.slider__border-image').style.cssText = 'width: 63%; top: -18px;';
+    document.querySelector('.meet__info-img').style.cssText = 'display: none;';
+    document.querySelector('.questions__title-img').style.cssText = 'right: 86px;';
+    document.querySelector('.vacancy__title-text').style.cssText = 'font-size: 113px;';
+    document.querySelector('.vacancy__title-img').style.cssText = 'width: 61%; top: -26px; right: 9px;';
+    if (window.matchMedia('(max-width: 1330px)').matches) {
+      document.querySelector('.promo__subtitle-text').style.cssText = 'font-size: 36px;';
+      document.querySelector('.advantages__title').style.cssText = 'font-size: 33px;';
+      document.querySelector('.stages__text').style.cssText = 'font-size: 43px;';
+      document.querySelector('.vacancy__title-text').style.cssText = 'font-size: 77px;';
+      document.querySelector('.vacancy__title-img').style.cssText = 'width: 61%; top: 7px; right: 9px;';
+    }
+    if (window.matchMedia('(max-width: 990px)').matches) {
+      document.querySelector('.advantages__title').style.cssText = 'font-size: 25px;';
+      document.querySelector('.stages__text').style.cssText = 'font-size: 36px;';
+      document.querySelector('.questions__title-img').style.cssText = 'right: 66px;';
+      document.querySelector('.vacancy__title-text').style.cssText = 'font-size: 55px;';
+      document.querySelector('.vacancy__title-img').style.cssText = 'width: 61%; top: -5px; right: 9px;';
+    }
+    if (window.matchMedia('(max-width: 767px)').matches) {
+      document.querySelector('.promo__subtitle-text').style.cssText = 'font-size: 28px;';
+      document.querySelector('.advantages__title-img').style.cssText = 'width: 42%; right: 103px;';
+      document.querySelector('.stages__text').style.cssText = 'font-size: 32px;';
+      document.querySelector('.vacancy__title-text').style.cssText = 'font-size: 49px;';
+    }
+    if (window.matchMedia('(max-width: 575px)').matches) {
+      document.querySelector('.promo__subtitle-text').style.cssText = 'font-size: 23px;';
+      document.querySelectorAll('.advantages__statistics-data').forEach(item => {
+        item.style.cssText = 'font-size: 16px;';
+      });
+      document.querySelector('.advantages__title-img').style.cssText = 'display: none;';
+      document.querySelectorAll('.tariff__block').forEach(item => {
+        item.style.cssText = 'min-height: 800px;';
+      });
+      document.querySelector('.stages__text').style.cssText = 'font-size: 27px;';
+      document.querySelector('.stages__img').style.cssText = 'display: none;';
+      document.querySelector('.vacancy__title-text').style.cssText = 'font-size: 33px;';
+      document.querySelector('.vacancy__title-img').style.cssText = 'display: none;';
+    }
+  }
+  function kk() {
+    document.querySelector('.promo__subtitle-text').style.cssText = 'font-size: 46px;';
+    document.querySelector('.advantages__statistics').style.cssText = 'width: 600px;';
+    document.querySelectorAll('.advantages__statistics-data').forEach(item => {
+      item.style.cssText = 'font-size: 29px;';
+    });
+    document.querySelector('.advantages__title').style.cssText = 'font-size: 50px;';
+    document.querySelectorAll('.tariff__price').forEach(item => {
+      item.style.cssText = 'margin-top: 15px;';
+    });
+    document.querySelectorAll('.tariff__btn').forEach(item => {
+      item.style.cssText = 'margin-top: 24px;';
+    });
+    document.querySelector('.slider__border-image').style.cssText = 'width: 56%; top: -16px;';
+    document.querySelector('.meet__info-img').style.cssText = 'display: none;';
+    document.querySelector('.questions__title-img').style.cssText = 'width: 36%; right: 69px;';
+    if (window.matchMedia('(max-width: 1330px)').matches) {
+      document.querySelector('.promo__subtitle-text').style.cssText = 'font-size: 38px;';
+      document.querySelector('.advantages__statistics').style.cssText = 'width: 410px;';
+      document.querySelectorAll('.advantages__statistics-data').forEach(item => {
+        item.style.cssText = 'font-size: 17px;';
+      });
+      document.querySelector('.advantages__title').style.cssText = 'font-size: 32px;';
+      document.querySelector('.advantages__title-img').style.cssText = '    width: 75%; right: 6px;';
+    }
+    if (window.matchMedia('(max-width: 990px)').matches) {
+      document.querySelector('.advantages__statistics').style.cssText = 'width: 311px;';
+      document.querySelectorAll('.advantages__statistics-data').forEach(item => {
+        item.style.cssText = 'font-size: 13px;';
+      });
+      document.querySelector('.advantages__title').style.cssText = 'font-size: 23px;';
+      document.querySelector('.questions__title-img').style.cssText = 'right: 66px; width: 34%; top: 0px;';
+      document.querySelector('.vacancy__title-text').style.cssText = 'font-size: 55px;';
+      document.querySelector('.vacancy__title-img').style.cssText = 'width: 61%; top: -5px; right: 9px;';
+    }
+    if (window.matchMedia('(max-width: 767px)').matches) {
+      document.querySelector('.promo__title').style.cssText = 'font-size: 78px;';
+      document.querySelector('.promo__subtitle-text').style.cssText = 'font-size: 30px;';
+      document.querySelector('.advantages__statistics').style.cssText = 'width: 280px;';
+      document.querySelectorAll('.advantages__statistics-data').forEach(item => {
+        item.style.cssText = 'font-size: 11px;';
+      });
+      document.querySelector('.advantages__title').style.cssText = 'font-size: 39px;';
+      document.querySelector('.vacancy__title-text').style.cssText = 'font-size: 51px;';
+    }
+    if (window.matchMedia('(max-width: 575px)').matches) {
+      document.querySelector('.promo__title').style.cssText = 'font-size: 54px;';
+      document.querySelector('.promo__subtitle-text').style.cssText = 'font-size: 24px;';
+      document.querySelector('.advantages__title').style.cssText = 'font-size: 23px;';
+      document.querySelector('.stages__text').style.cssText = 'font-size: 27px;';
+      document.querySelector('.stages__img').style.cssText = 'display: none;';
+      document.querySelector('.examples__text').style.cssText = 'font-size: 25px;';
+      document.querySelector('.questions__title-img').style.cssText = 'display: none;';
+      document.querySelector('.vacancy__title-img').style.cssText = 'display: none;';
+      document.querySelector('.vacancy__title-text').style.cssText = 'font-size: 29px;';
+    }
+  }
+  function ar() {
+    document.querySelector('.advantages__title-img').style.cssText = 'width: 36%; left: 0;';
+    document.querySelector('.meet__info-img').style.cssText = 'display: none;';
+    document.querySelector('.questions__title-img').style.cssText = 'display: none;';
+    document.querySelector('.vacancy__title-img').style.cssText = 'display: none;';
+    if (window.matchMedia('(max-width: 1330px)').matches) {
+      document.querySelector('.advantages__title-img').style.cssText = 'display: none;';
+    }
+    if (window.matchMedia('(max-width: 990px)').matches) {
+      document.querySelector('.advantages__step-group').style.cssText = 'margin-top: 82px;';
+    }
+    if (window.matchMedia('(max-width: 767px)').matches) {
+      document.querySelector('.advantages__step-group').style.cssText = 'margin-top: 25px;';
+      document.querySelector('.advantages__title').style.cssText = '    margin-top: 138px';
+    }
+    if (window.matchMedia('(max-width: 575px)').matches) {
+      document.querySelector('.advantages__statistics').style.cssText = 'width: 246px;';
+      document.querySelector('.advantages__title').style.cssText = '    margin-top: 25px';
+      document.querySelector('.advantages__photo-descr').style.cssText = 'display: flex; flex-direction: column;';
+      document.querySelector('.stages__img').style.cssText = 'top:0   ;';
+      document.querySelector('.slider__border-image').style.cssText = 'display: none;';
+    }
+  }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (langChange);
+
+/***/ }),
+
 /***/ "./src/js/modules/lang.js":
 /*!********************************!*\
   !*** ./src/js/modules/lang.js ***!
@@ -442,12 +786,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_sendForm__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/sendForm */ "./src/js/modules/sendForm.js");
 /* harmony import */ var _modules_up__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/up */ "./src/js/modules/up.js");
 /* harmony import */ var _modules_lang__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/lang */ "./src/js/modules/lang.js");
+/* harmony import */ var _modules_lang_change__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/lang-change */ "./src/js/modules/lang-change.js");
 
 
 
 
 
 // import check from './modules/check';
+
 
 
 
@@ -467,6 +813,7 @@ document.addEventListener('DOMContentLoaded', () => {
   (0,_modules_sendForm__WEBPACK_IMPORTED_MODULE_4__["default"])('.vacancy__form', '.vacancy__example', '#answer', '.vacancy__submit', 'vacancy__loader', 'vacancy__loader_active', '.modal__close', '.overlay', '.modal__info', 'overlay_show');
   (0,_modules_up__WEBPACK_IMPORTED_MODULE_5__["default"])('.pageup');
   (0,_modules_lang__WEBPACK_IMPORTED_MODULE_6__["default"])('.header__item-link_drop', '.language', 'language_active', '.language__img');
+  (0,_modules_lang_change__WEBPACK_IMPORTED_MODULE_7__["default"])('.language__img', '.video__src');
 });
 })();
 
